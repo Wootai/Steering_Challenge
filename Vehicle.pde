@@ -13,9 +13,9 @@ class Vehicle{
     float maxspeed;
     float maxforce;
     
-  Vehicle (float x, float y) {
+  Vehicle (PVector t) {
      pos = new PVector(random(width), random(height));
-     target = new PVector(x, y);
+     target = t;
      vel = PVector.random2D();
      acc = new PVector();
      r = 8;
@@ -25,14 +25,14 @@ class Vehicle{
 
   void behaviors() {
     PVector arrive = arrive(target);
-    PVector mouse = new PVector(mouseX, mouseY);
-    PVector flee = flee(mouse);
+   // PVector mouse = new PVector(mouseX, mouseY);
+    //PVector flee = flee(mouse);
   
     arrive.mult(0);
-    flee.mult(5);
+    //flee.mult(5);
   
     applyForce(arrive);
-    applyForce(flee);
+    //applyForce(flee);
   }
 
   void applyForce(PVector f) { //<>//
@@ -47,14 +47,13 @@ class Vehicle{
 
   void show() {
     stroke(255);
-    strokeWeight(8);
+    strokeWeight(r);
     point(pos.x, pos.y);
 }
 
-
   PVector arrive(PVector t) {
     PVector desired;
-    desired = pos.sub(t);
+    desired = t.sub(pos);
     float d = desired.mag();
     float speed = maxspeed;
     if (d < 100) {

@@ -33,7 +33,7 @@ void setup() {
 
   for (int i = 0; i < points.size(); i++) {
     PVector pt = points.get(i);
-    v = new Vehicle(pt.x, pt.y);
+    v = new Vehicle(points.get(i));
     vehicles.add(v);
     // stroke(255);
     // strokeWeight(8);
