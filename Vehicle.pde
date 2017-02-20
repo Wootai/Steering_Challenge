@@ -16,13 +16,13 @@ class Vehicle{
     
   Vehicle (PVector t) {
      pos = new PVector(random(width), random(height));
-     target = new PVector(300, 150);
+     target = t;
      vel = PVector.random2D();
      acc = new PVector();
      r = 8;
      maxspeed = 10;
      maxforce = 1;
-//     println(target);
+     println(target);
   }
 
   void behaviors() {
@@ -53,10 +53,10 @@ class Vehicle{
     stroke(255);
     strokeWeight(r);
     point(pos.x, pos.y);
-}
+  }
 
   PVector arrive(PVector t) {
-    println(t);
+    //println(t);
     desired = t.sub(pos);
     
     float d = desired.mag();
@@ -72,18 +72,18 @@ class Vehicle{
     return steer;
   }
 
-  PVector flee(PVector target) {
-    PVector desired = target.sub(pos);
-    float d = desired.mag();
-      if (d < 50) {
-        desired.setMag(this.maxspeed);
-        desired.mult(-1);
-        PVector steer = desired.sub(this.vel);
-        steer.limit(this.maxforce);
-        return steer;
-      } 
-      else {
-        return new PVector(0,0);
-    }
-  }
+//  PVector flee(PVector target) {
+//    PVector desired = target.sub(pos);
+//    float d = desired.mag();
+//      if (d < 50) {
+//        desired.setMag(this.maxspeed);
+//        desired.mult(-1);
+//        PVector steer = desired.sub(this.vel);
+//        steer.limit(this.maxforce);
+//        return steer;
+//      } 
+//      else {
+//        return new PVector(0,0);
+//    }
+//  }
 }
