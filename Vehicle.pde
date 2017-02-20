@@ -49,7 +49,7 @@ class Vehicle{
     acc.mult(0);
   }
 
-  void show() {
+  void show() {  
     stroke(255);
     strokeWeight(r);
     point(pos.x, pos.y);
