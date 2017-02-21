@@ -9,8 +9,6 @@ class Vehicle{
     PVector vel;
     PVector acc;
     PVector desired;
-    
-    float r;
     float maxspeed;
     float maxforce;
     
@@ -19,71 +17,47 @@ class Vehicle{
      target = t;
      vel = PVector.random2D();
      acc = new PVector();
-     r = 8;
      maxspeed = 10;
      maxforce = 1;
-     println(target);
   }
 
   void behaviors() {
-   // PVector arrive = arrive(target);
-   // PVector mouse = new PVector(mouseX, mouseY);
-    //PVector flee = flee(mouse);
-  
-    //arrive.mult(1);
-    //flee.mult(5);
-  
-    applyForce(arrive(target));
-    println(target);
+    PVector arrive = arrive(target.x, target.y);
+    applyForce(arrive);
 
-    //applyForce(flee);
   }
 
   void applyForce(PVector f) { //<>//
-    acc.add(f);
+    vel.add(f);
 }
 
   void update() {
-    pos.add(vel);
-    vel.add(acc);
-    acc.mult(0);
+     vel.add(acc);
+     pos.add(vel);
+     acc.mult(0);
   }
 
   void show() {  
     stroke(255);
-    strokeWeight(r);
+    strokeWeight(8);
     point(pos.x, pos.y);
   }
 
-  PVector arrive(PVector t) {
-    //println(t);
-    desired = t.sub(pos);
+  PVector arrive(float x, float y) {
+    PVector mytar = new PVector(x, y);
+    desired = mytar.sub(pos);
     
     float d = desired.mag();
+    println(d);
     float speed = maxspeed;
-    
+  
     if (d < 100) {
       speed = map(d, 0, 100, 0, maxspeed);
     }
-    
+  
     desired.setMag(speed);
     PVector steer = desired.sub(vel);
     steer.limit(maxforce);
     return steer;
   }
-
-//  PVector flee(PVector target) {
-//    PVector desired = target.sub(pos);
-//    float d = desired.mag();
-//      if (d < 50) {
-//        desired.setMag(this.maxspeed);
-//        desired.mult(-1);
-//        PVector steer = desired.sub(this.vel);
-//        steer.limit(this.maxforce);
-//        return steer;
-//      } 
-//      else {
-//        return new PVector(0,0);
-//    }
-//  }
 }

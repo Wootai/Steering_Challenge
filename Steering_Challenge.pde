@@ -24,26 +24,18 @@ void setup() {
   textSize(192);
   fill(255);
   noStroke();
-  
-  for(int i = 0; i <1; i++){
-    //p = new PVector();
-    p = new PVector(random(width), random(height));
-    points.add(p);
-  }
 
-  for (int i = 0; i < points.size(); i++) {
-    v = new Vehicle(points.get(i));
-    vehicles.add(v);
+
+  p = new PVector(random(width), random(height));
+
+  v = new Vehicle(p);
+  vehicles.add(v);
 
   }
-}
-
 
 void draw() {
  background(51);
  
- text("train", 100, 200);
-
  for (int i = 0; i < vehicles.size(); i++) {
     vehicles.get(i).behaviors();
     vehicles.get(i).update();
